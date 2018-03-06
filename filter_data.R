@@ -6,6 +6,11 @@ library(plotrix)
 shinyServer(function(input, output) {
 
   inputDataOne <- reactive({
+<<<<<<< HEAD
+    dataUsed <- data %>% filter(Offense_charged == input$Type)
+    dataUsed <- dataUsed[,grepl(input$Age, names(data))]
+    
+=======
     if (input$Age != "All") {
       dataUsed <- data %>% select(grep(input$age, names(data)))
     } else {
@@ -13,15 +18,20 @@ shinyServer(function(input, output) {
     }
     dataUsed <- dataUsed %>% filter(Offense_charged = input$Type)
 
+>>>>>>> yajing-feature
     dataUsed
   })
   
-  output$table <- renderTable({
-    cereal()
+  inputDataTwo <- reactive({
+    dataUsed <- data[,1:6]
+    dataUsed <- dataUsed[,grepl(input$Race, names(data))]
+    dataUsed$Offense_charged <- data[,1] 
+    
+    head(dataUsed,input$Num)
   })
   
-  output$plot <- renderPlot({
-    ggplot(cereal(), aes(x=rating, y=calories)) + geom_point(color="red") + ggtitle("the relationship between rating & calories")
-  })
-  
+<<<<<<< HEAD
+=======
+
+>>>>>>> yajing-feature
 })

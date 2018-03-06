@@ -17,14 +17,15 @@ ui <- fluidPage(
       
       radioButtons("Age",
                   label = "Choose an Age Range: ",
-                  choices = c("Total arrests" = "All",
+                  choices = c("Total arrests" = "total",
                               "Under 18" = "under", 
                               "Above 18" = "over"
                               )
       )
     ),
     mainPanel(
-      plotOutput("pieChart")
+      tableOutput("table"),
+      plotOutput("plot")
     )
   )
 )
