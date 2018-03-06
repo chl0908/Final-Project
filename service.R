@@ -4,7 +4,7 @@ library(dplyr)
 library(ggplot2)
 library(plotrix)
 shinyServer(function(input, output) {
-
+  
   inputDataOne <- reactive({
     if (input$Age != "All") {
       dataUsed <- data %>% select(grep(input$age, names(data)))
@@ -12,16 +12,17 @@ shinyServer(function(input, output) {
       dataUsed <- data
     }
     dataUsed <- dataUsed %>% filter(Offense_charged = input$Type)
-
+    
     dataUsed
   })
   
   output$table <- renderTable({
-    cereal()
+    inputDataOne()
   })
   
   output$plot <- renderPlot({
-    ggplot(cereal(), aes(x=rating, y=calories)) + geom_point(color="red") + ggtitle("the relationship between rating & calories")
+    pie3D(slices,labels=lbls,explode=0.1,
+          main="Pie Chart of Countries ")
   })
   
 })
