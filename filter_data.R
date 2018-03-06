@@ -1,9 +1,11 @@
-data <- read.csv("C:/Users/admin/Desktop/info201/Final-Project/data/data.csv")
+data <- read.csv("/Users/a1111/desktop/info201HW/Final-Project/data/data.csv")
+install.packages("plotrix")
 library(dplyr)
-
+library(ggplot2)
+library(plotrix)
 shinyServer(function(input, output) {
 
-  inputData <- reactive({
+  inputDataOne <- reactive({
     if (input$Age != "All") {
       dataUsed <- data %>% select(grep(input$age, names(data)))
     } else {
@@ -14,5 +16,12 @@ shinyServer(function(input, output) {
     dataUsed
   })
   
-
+  output$table <- renderTable({
+    cereal()
+  })
+  
+  output$plot <- renderPlot({
+    ggplot(cereal(), aes(x=rating, y=calories)) + geom_point(color="red") + ggtitle("the relationship between rating & calories")
+  })
+  
 })
