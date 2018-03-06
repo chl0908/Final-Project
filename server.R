@@ -1,4 +1,4 @@
-data <- read.csv("/Users/a1111/desktop/info201HW/Final-Project/data/data.csv")
+data <- read.csv("data/data.csv")
 #install.packages("plotrix")
 library(dplyr)
 library(ggplot2)
