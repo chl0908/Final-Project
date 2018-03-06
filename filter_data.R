@@ -3,7 +3,7 @@ library(dplyr)
 
 shinyServer(function(input, output) {
 
-  inputData <- reactive({
+  inputDataOne <- reactive({
     if (input$Age != "All") {
       dataUsed <- data %>% select(grep(input$age, names(data)))
     } else {
