@@ -22,9 +22,6 @@ ui <- fluidPage(
                               "Above 18" = "over"
                               )
       )
-      
-      
-      
     ),
     mainPanel(
       plotOutput("pieChart")
