@@ -6,18 +6,21 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       
+
       selectInput("Type",
-                  label = "What kind of crime are you looking for? ",
-                  choices = c("???????????")
+                  label = "Choose a Crime Type:",
+                  choices = c(crimeType),
+                  selected = "Robbery"
       ),
       
       hr(),
       
-      selectInput("Age",
-                  label = "Which age range are you looking for? ",
-                  choices = c("Under 18" = "under", 
-                              "Above 18" = "over", 
-                              "Total arrests" = "All")
+      radioButtons("Age",
+                  label = "Choose an Age Range: ",
+                  choices = c("Total arrests" = "All",
+                              "Under 18" = "under", 
+                              "Above 18" = "over"
+                              )
       )
       
       
