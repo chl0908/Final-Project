@@ -17,3 +17,7 @@ crimeType <- list("Robbery","Rape", "Aggravated assault",
                   "Vagrancy", "All other offenses (except traffic)",
                   "Suspicion", "Curfew and loitering law violations"
                   )
+
+race <- list("White","Black or African American" = "Black",
+             "American Indian or Alaskan Native" = "Indian", "Asian",
+             "Native Hawaiian or Other Pacific Islander" = "Hawaiian")
