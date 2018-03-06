@@ -14,5 +14,11 @@ shinyServer(function(input, output) {
     dataUsed
   })
   
+ # inputDataTwo <- reactive({
+  #  dataUsed <- data[1:6]
+  #  dataUsed <- dataUsed %>% select(grep(input$Race, names(data)))
+  #  head(dataUsed, input$num)
+ # })
+  
 
 })
