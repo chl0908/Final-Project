@@ -20,12 +20,12 @@ shinyServer(function(input, output) {
     
     output$plot <- renderPlot({
       c <- as.numeric(inputDataOne()[1,]) 
-<<<<<<< HEAD
+
       colors <- c('rgb(211,94,96)', 'rgb(128,133,133)', 'rgb(144,103,167)', 'rgb(171,104,87)', 'rgb(114,147,203)')
       pie3D(c,explode=0.02,radius=1.0,shade=0.5,
         main="Pie Chart of Crimes ")
       })
-=======
+
       #pie3D(c,
       #  main="Pie Chart of Crimes ")
       df <- data.frame(COM = c("ch", "ch", "zu","zu"), year = c("2015", "2016","2015", "2016"), values= c(100,125,65,17))
@@ -34,8 +34,7 @@ shinyServer(function(input, output) {
       
       plot_ly(data2015, labels = ~COM, values = ~ values, type = "pie", domain = list(x = c(0, 0.5), y = c(0, 1))) %>%
         add_trace(data = data2016, labels = ~COM, values = ~ values, type = "pie", domain = list(x = c(0.5, 1), y = c(0, 1)))
-    })
->>>>>>> e0ad178ad1f7da4fc4fa719cdaa420d6f27e0356
+
     
 })
 
