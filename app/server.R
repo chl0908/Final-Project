@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+library(shiny)
+
+server <- function(input, output, session) {
+  
+}
+=======
 data <- read.csv("data/data.csv")
 #install.packages("plotrix")
 library(dplyr)
@@ -28,3 +35,4 @@ shinyServer(function(input, output) {
   })
 
   
+>>>>>>> d686b13a0e66d41cf4cdf81a115b93d49ab24c3c
