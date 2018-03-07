@@ -1,5 +1,5 @@
-data <- read.csv("data/data.csv")
-dataTwo <- read.csv("data/dataTwo.csv")
+data <- read.csv("data/data.csv",stringsAsFactors=FALSE)
+dataTwo <- read.csv("data/dataTwo.csv",stringsAsFactors=FALSE)
 #install.packages("plotrix")
 #install.packages("plotly")
 library(dplyr)
@@ -16,10 +16,9 @@ shinyServer(function(input, output) {
     })
     
     inputDataTwo <- reactive({
-      amount <- dataTwo[,grepl(input$Race, names(dataTwo))]
+      amount <-dataTwo[,grepl(input$Race, names(dataTwo))]
       dataUsed <- data.frame(amount = amount, Offense_charged = dataTwo$Offense.charged)
       dataUsed$x <- runif(30, min=0, max=4)
-      dataUsed <- dataUsed %>% arrange(desc(amount))
       dataUsed <- tail(dataUsed,input$Num)
       dataUsed$y <-seq(0,4,4/(input$Num - 1))
       dataUsed$size <- seq(10,10+5*(input$Num - 1),5)
@@ -28,7 +27,7 @@ shinyServer(function(input, output) {
     })
     
     output$pieTable <- renderTable({
-        inputDataOne()
+        data.frame(Race = names(inputDataOne()), Share = paste0(inputDataOne()[1,],"%"))
     })
     
     output$pie <- renderPlotly({
