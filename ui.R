@@ -24,9 +24,10 @@ ui <- fluidPage(
       )
     ),
     mainPanel(
-      tableOutput("table"),
-      plotOutput("plot")
+      tabsetPanel(type = "tabs",
+                  tabPanel("Plot", plotOutput("plot")),
+                  tabPanel("Table", tableOutput("table"))
     )
   )
 )
-
+)
