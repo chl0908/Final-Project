@@ -1,4 +1,7 @@
 library(shiny)
+library(plotly)
+#install.packages("shinythemes")
+library(shinythemes)
 
 navbarPage(theme = shinytheme("darkly"), "Crime Report",
            tabPanel("About",
