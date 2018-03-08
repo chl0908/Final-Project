@@ -16,7 +16,7 @@ navbarPage(theme = shinytheme("darkly"), "Crime Report",
                     )
            ),
            
-           tabPanel("Pie Chart",
+           tabPanel("Search Share of Each Race",
                     sidebarLayout(
                       sidebarPanel(
                         
@@ -35,18 +35,21 @@ navbarPage(theme = shinytheme("darkly"), "Crime Report",
                                                  "Under 18" = "under", 
                                                  "Above 18" = "over"
                                      )
-                        )
+                        ),
+                        
+                        helpText(hr("Note: click on a race type on the legend bar to exclude it from the graph"))
                       ),
                       
                       mainPanel(
                         tabsetPanel(type = "tabs",
-                                    tabPanel("Pie Chart", plotlyOutput("pie")),
+                                    tabPanel("Pie Chart", plotlyOutput("pie"),textOutput("pieAnalysis1"),
+                                             textOutput("pieAnalysis2"),textOutput("pieAnalysis3"),textOutput("pieAnalysis4")),
                                     tabPanel("Table", tableOutput("pieTable"))
                         )
                       )
                     )
            ),
-           tabPanel("Bubble Chart",
+           tabPanel("Search Top Crime",
                     sidebarLayout(
                       sidebarPanel(
                         selectInput("Race",
@@ -59,12 +62,15 @@ navbarPage(theme = shinytheme("darkly"), "Crime Report",
                         
                         sliderInput("Num", label = "Choose a number of crime you want ",
                                     min = 1, max = 30, value = 5
-                        )
+                        ),
+                        
+                        helpText("View the top number of crimes criminals in this race were arrested for.")
                       ),
                       
                       mainPanel(
                         tabsetPanel(type = "tabs",
-                                    tabPanel("Bubble Chart", plotlyOutput("bubble")),
+                                    tabPanel("Bubble Chart", plotlyOutput("bubble"), textOutput("text1"),
+                                             textOutput("text2"),textOutput("text3")),
                                     tabPanel("Table", tableOutput("bubbleTable"))
                         )
                       )

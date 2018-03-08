@@ -16,22 +16,22 @@ shinyServer(function(input, output) {
   
   inputDataTwo <- reactive({
     amount <- dataTwo[,grepl(input$Race, names(dataTwo))]
-    dataUsed <- data.frame(amount = as.numeric(gsub("\\D","",amount)), Offense_charged = dataTwo$Offense.charged)
-    dataUsed$x <- runif(30, min=0, max=4)
+    dataUsed <- data.frame(amount = as.numeric(gsub(",", "", amount)), Offense_charged = dataTwo$Offense.charged)
+    dataUsed$x <- runif(30, min=0, max=10)
     dataUsed <- dataUsed %>% arrange(desc(amount))
     dataUsed <- head(dataUsed,input$Num)
     if(input$Num == 1) {
       dataUsed$y <- c(2)
-      dataUsed$size <- c(10)
+      dataUsed$size <- c(100)
     } else {
       dataUsed$y <-seq(4,0,-4/(input$Num - 1))
-      dataUsed$size <- seq(10+5*(input$Num - 1),10,-5)
+      dataUsed$size <- seq(155,10,-145/(input$Num - 1))
     }
     dataUsed
   })
   
   output$pieTable <- renderTable({
-    inputDataOne()
+    data.frame("Race" = names(inputDataOne()), "Amount" = paste0(unlist(inputDataOne()[1,])),"%")
   })
   
   output$pie <- renderPlotly({
@@ -47,6 +47,35 @@ shinyServer(function(input, output) {
       config(displayModeBar = F)
   })
   
+  output$pieAnalysis1 <- renderText({paste0("Crime Type: ",input$Type)})
+  
+  output$pieAnalysis2 <- renderText({
+    if(input$Age != "total") {
+      paste0("Age: ",input$Age, " 18")
+    } else {
+      paste0("Age: All")
+    }
+  })
+  
+  precent <- reactive({
+    sapply(inputDataOne()[1,], as.numeric)
+  })
+  
+  tempt <- reactive({
+    data.frame("amount" = precent(), "name" = names(inputDataOne()))
+  })
+  
+  output$pieAnalysis3 <- renderText({
+    paste0("1. Given these conditions, the highest percentage of criminals arrested, ", max(precent()),
+            "% were classified as ", with(tempt(),tempt()[amount == max(precent()),])$name, ", implying that they have the highest risk of being arrested.")
+  })
+  
+  output$pieAnalysis4 <- renderText({
+    paste0("2. The lowest percentage of criminals arrested, ", min(precent()),
+           "% were classified as ", with(tempt(),tempt()[amount == min(precent()),])$name, ", suggesting that they have the lowest risk of being arrested.")
+  })
+
+  
   output$bubbleTable <- renderTable({
     data.frame(Offense = inputDataTwo()$Offense_charged, Amount = inputDataTwo()$amount)
   })
@@ -58,6 +87,27 @@ shinyServer(function(input, output) {
              xaxis = list(title = " ", showgrid = FALSE, zeroline = FALSE, showticklabels =FALSE),
              yaxis = list(title = " ", showgrid = FALSE, zeroline =FALSE, showticklabels = FALSE)) %>%
       config(displayModeBar = F)
+  })
+  
+  output$text1 <- renderText({
+    paste0("1. This graph shows the top ", input$Num," types of crime that criminals classified as ", input$Race," were arrested for.")
+  })
+  
+  secondCrime <- reactive({
+    inputDataTwo()[2,]$Offense_charged
+  })
+  
+  
+  output$text2 <- renderText({
+   # a <- head(inputDataTwo(),-1)$Offense_charged
+    paste0("2. While the top crime for every race was all other offenses,
+           the next most common crime type criminals under this race were mainly arrested for was ",
+           inputDataTwo()[2,]$Offense_charged, " and the least number of criminals were arrested for ",
+           tail(inputDataTwo(),1)$Offense_charged,".")
+  })
+  
+  output$text3 <- renderText({
+    paste0("3. ",sum(inputDataTwo()$amount)," criminals were arrested for the top ", input$Num," types of crimes.")
   })
 })
 
