@@ -31,7 +31,7 @@ shinyServer(function(input, output) {
   })
   
   output$pieTable <- renderTable({
-    data.frame("Race" = names(inputDataOne()), "Amount" = paste0(unlist(inputDataOne()[1,])),"%")
+    data.frame("Race" = names(inputDataOne()), "Share" = paste0(unlist(inputDataOne()[1,]),"%"))
   })
   
   output$pie <- renderPlotly({
