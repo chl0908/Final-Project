@@ -1,17 +1,17 @@
 # ARRESTS IN 2013
-* ### BASED ON _AGE, RACE & CRIME_
+###### BASED ON _AGE, RACE & CRIME_
 
 
 ![jpd](images.png)
 
 
 
-Our project’s purpose is to provide insight into the
+Our project's purpose is to provide insight into the
 relationship between
 _age, race and crime_. The data used
 for this project was collected in 2013 by the FBI and published
  by the Uniform Crime Report on their website. The main question we
-  are attempting to answer through this app is whether or not a person’s race and age
+  are attempting to answer through this app is whether or not a person's race and age
   would affect their likelihood of being arrested. This topic has been a major public
   controversy that has been debated upon for many years.
   The user can view data percentages for criminals from either all ages, those under 18 or those who are 18
